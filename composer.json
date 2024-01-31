@@ -21,7 +21,7 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "php": "^7.4|^8.0"
+        "php": "^7.3|^7.4|^8.0"
     },
     "require-dev": {
         "maglnet/composer-require-checker": "^3.8|^4.2",
