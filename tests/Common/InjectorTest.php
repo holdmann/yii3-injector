@@ -42,7 +42,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer([EngineInterface::class => new EngineMarkTwo()]);
 
-        $getEngineName = fn (EngineInterface $engine) => $engine->getName();
+        $getEngineName = function (EngineInterface $engine) {
+            return $engine->getName();
+        };
 
         $engineName = (new Injector($container))->invoke($getEngineName);
 
@@ -120,7 +122,10 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer([EngineInterface::class => new EngineMarkTwo()]);
         $class = new class () {
-            public EngineInterface $engine;
+            /**
+             * @var \Yiisoft\Injector\Tests\Common\Support\EngineInterface
+             */
+            public $engine;
 
             public function setEngine(EngineInterface $engine): void
             {
@@ -140,7 +145,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer();
 
-        $true = fn () => true;
+        $true = function () {
+            return true;
+        };
 
         $result = (new Injector($container))->invoke($true);
 
@@ -154,7 +161,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer([EngineInterface::class => new EngineMarkTwo()]);
 
-        $nullable = fn (?EngineInterface $engine) => $engine;
+        $nullable = function (?EngineInterface $engine) {
+            return $engine;
+        };
 
         $result = (new Injector($container))->invoke($nullable);
 
@@ -168,7 +177,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer();
 
-        $nullable = fn (?EngineInterface $engine) => $engine;
+        $nullable = function (?EngineInterface $engine) {
+            return $engine;
+        };
 
         $result = (new Injector($container))->invoke($nullable);
 
@@ -182,7 +193,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer();
 
-        $nullableInt = fn (?int $number) => $number;
+        $nullableInt = function (?int $number) {
+            return $number;
+        };
 
         $result = (new Injector($container))->invoke($nullableInt);
 
@@ -196,7 +209,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer();
 
-        $nullableInt = fn (?int $number = 6) => $number;
+        $nullableInt = function (?int $number = 6) {
+            return $number;
+        };
 
         $result = (new Injector($container))->invoke($nullableInt);
 
@@ -211,7 +226,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer([EngineInterface::class => new EngineMarkTwo()]);
 
-        $callable = fn (EngineInterface $engine = null) => $engine;
+        $callable = function (EngineInterface $engine = null) {
+            return $engine;
+        };
 
         $result = (new Injector($container))->invoke($callable);
 
@@ -226,7 +243,9 @@ class InjectorTest extends BaseInjectorTest
         $container = $this->getContainer([EngineInterface::class => new EngineMarkTwo()]);
         $needleEngine = new EngineZIL130();
 
-        $getEngineName = fn (EngineInterface $engine) => $engine->getName();
+        $getEngineName = function (EngineInterface $engine) {
+            return $engine->getName();
+        };
 
         $engineName = (new Injector($container))->invoke(
             $getEngineName,
@@ -339,7 +358,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer();
 
-        $callable = fn (int ...$var) => array_sum($var);
+        $callable = function (int ...$var) {
+            return array_sum($var);
+        };
 
         $result = (new Injector($container))->invoke($callable, ['var' => [1, 2, 3], new stdClass()]);
 
@@ -350,7 +371,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer();
 
-        $callable = fn (string $foo, string ...$bar) => $foo . '--' . implode('-', $bar);
+        $callable = function (string $foo, string ...$bar) {
+            return $foo . '--' . implode('-', $bar);
+        };
 
         $result = (new Injector($container))
             ->invoke($callable, ['foo' => 'foo', 'bar' => ['foo' => 'baz', '0' => 'fiz']]);
@@ -362,7 +385,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer();
 
-        $callable = fn (int ...$var) => array_sum($var);
+        $callable = function (int ...$var) {
+            return array_sum($var);
+        };
 
         $result = (new Injector($container))->invoke($callable, ['var' => 42, new stdClass()]);
 
@@ -377,7 +402,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer([DateTimeInterface::class => new DateTimeImmutable()]);
 
-        $callable = fn (DateTimeInterface $dateTime, EngineInterface ...$engines) => count($engines);
+        $callable = function (DateTimeInterface $dateTime, EngineInterface ...$engines) {
+            return count($engines);
+        };
 
         $result = (new Injector($container))->invoke(
             $callable,
@@ -394,7 +421,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer([DateTimeInterface::class => new DateTimeImmutable()]);
 
-        $callable = fn (...$engines) => $engines;
+        $callable = function (...$engines) {
+            return $engines;
+        };
 
         $result = (new Injector($container))->invoke(
             $callable,
@@ -411,7 +440,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer([DateTimeInterface::class => new DateTimeImmutable()]);
 
-        $callable = fn (string ...$engines) => $engines;
+        $callable = function (string ...$engines) {
+            return $engines;
+        };
 
         $this->expectException(\Exception::class);
 
@@ -425,7 +456,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer();
 
-        $callable = fn (?EngineInterface ...$engines) => $engines;
+        $callable = function (?EngineInterface ...$engines) {
+            return $engines;
+        };
 
         $result = (new Injector($container))->invoke($callable, []);
 
@@ -465,7 +498,9 @@ class InjectorTest extends BaseInjectorTest
     public function testInvokeWithObjectType(): void
     {
         $container = $this->getContainer();
-        $callable = fn (object $object) => get_class($object);
+        $callable = function (object $object) {
+            return get_class($object);
+        };
 
         $result = (new Injector($container))->invoke($callable, [new DateTimeImmutable()]);
 
@@ -478,7 +513,9 @@ class InjectorTest extends BaseInjectorTest
     public function testInvokeWithRequiredObjectTypeWithoutInstance(): void
     {
         $container = $this->getContainer();
-        $callable = fn (object $object) => get_class($object);
+        $callable = function (object $object) {
+            return get_class($object);
+        };
 
         $this->expectException(MissingRequiredArgumentException::class);
 
@@ -538,12 +575,9 @@ class InjectorTest extends BaseInjectorTest
         $baz = new DateTimeImmutable();
         $fiz = new DateTime();
         $kus = new DateTime();
-        $callable = static fn (
-            stdClass &$foo,
-            object &$bar,
-            ?ColorInterface $null,
-            DateTimeInterface &...$dates
-        ) => func_num_args();
+        $callable = static function (stdClass &$foo, object &$bar, ?ColorInterface $null, DateTimeInterface &...$dates) {
+            return func_num_args();
+        };
 
         $args = [&$foo, &$baz, &$fiz, &$kus, 'bar' => &$bar];
         unset($foo, $baz, $biz, $fiz, $kus, $bar);
@@ -587,7 +621,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer([EngineInterface::class => new EngineMarkTwo()]);
         $foo = 1;
-        $callable = fn (int $foo) => ++$foo;
+        $callable = function (int $foo) {
+            return ++$foo;
+        };
         $result = (new Injector($container))->invoke($callable, ['foo' => &$foo]);
 
         // $foo has been not changed
@@ -599,7 +635,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer([EngineInterface::class => new EngineMarkTwo()]);
 
-        $callable = fn (EngineInterface $engine) => $engine;
+        $callable = function (EngineInterface $engine) {
+            return $engine;
+        };
 
         $this->expectException(\Throwable::class);
 
@@ -610,7 +648,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer([EngineInterface::class => new EngineMarkTwo()]);
 
-        $callable = fn (array $arg) => $arg;
+        $callable = function (array $arg) {
+            return $arg;
+        };
 
         $this->expectException(InvalidArgumentException::class);
 
@@ -621,18 +661,24 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer([EngineInterface::class => new EngineMarkTwo()]);
 
-        $callable = fn (callable $arg) => $arg();
+        $callable = function (callable $arg) {
+            return $arg();
+        };
 
         $this->expectException(MissingRequiredArgumentException::class);
 
-        (new Injector($container))->invoke($callable, [fn () => true]);
+        (new Injector($container))->invoke($callable, [function () {
+            return true;
+        }]);
     }
 
     public function testIterableArgumentWithUnnamedType(): void
     {
         $container = $this->getContainer([EngineInterface::class => new EngineMarkTwo()]);
 
-        $callable = fn (iterable $arg) => $arg;
+        $callable = function (iterable $arg) {
+            return $arg;
+        };
 
         $this->expectException(MissingRequiredArgumentException::class);
 
@@ -643,7 +689,9 @@ class InjectorTest extends BaseInjectorTest
     {
         $container = $this->getContainer();
 
-        $getEngineName = fn () => 42;
+        $getEngineName = function () {
+            return 42;
+        };
 
         $this->expectException(InvalidArgumentException::class);
 

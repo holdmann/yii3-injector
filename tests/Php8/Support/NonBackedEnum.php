@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Yiisoft\Injector\Tests\Php8\Support;
 
-enum NonBackedEnum
+class NonBackedEnum
 {
-    case Foo;
-    case Bar;
+    public const Foo = 'foo';
+    public const Bar = 'bar';
 }

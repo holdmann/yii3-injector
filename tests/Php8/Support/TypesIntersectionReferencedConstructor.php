@@ -9,8 +9,15 @@ use Countable;
 
 class TypesIntersectionReferencedConstructor
 {
-    public function __construct(
-        public ArrayAccess&Countable &$collection
-    ) {
+    /**
+     * @var \ArrayAccess&\Countable
+     */
+    public $collection;
+    /**
+     * @param \ArrayAccess&\Countable $collection
+     */
+    public function __construct(&$collection)
+    {
+        $this->collection = $collection;
     }
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Yiisoft\Injector\Tests\Php8\Support;
 
-enum IntEnum: int
+class IntEnum
 {
-    case Foo = 1;
-    case Bar = 2;
+    public const Foo = 1;
+    public const Bar = 2;
 }

@@ -24,14 +24,20 @@ use ReflectionUnionType;
  */
 final class Injector
 {
-    private ?ContainerInterface $container;
-    private bool $cacheReflections = false;
+    /**
+     * @var \Psr\Container\ContainerInterface|null
+     */
+    private $container;
+    /**
+     * @var bool
+     */
+    private $cacheReflections = false;
 
     /**
      * @var ReflectionClass[]
      * @psalm-var array<class-string,ReflectionClass>
      */
-    private array $reflectionsCache = [];
+    private $reflectionsCache = [];
 
     public function __construct(?ContainerInterface $container = null)
     {
@@ -264,7 +270,7 @@ final class Injector
                 $types = [$type];
                 // no break
             case $type instanceof ReflectionUnionType:
-                $types ??= $type->getTypes();
+                $types = $types ?? $type->getTypes();
                 /** @var array<int, ReflectionNamedType> $types */
                 foreach ($types as $namedType) {
                     try {
@@ -336,7 +342,7 @@ final class Injector
     private function getClassReflection(string $class): ReflectionClass
     {
         if ($this->cacheReflections) {
-            return $this->reflectionsCache[$class] ??= new ReflectionClass($class);
+            return $this->reflectionsCache[$class] = $this->reflectionsCache[$class] ?? new ReflectionClass($class);
         }
 
         return new ReflectionClass($class);

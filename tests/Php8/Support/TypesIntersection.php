@@ -11,31 +11,53 @@ use Countable;
 
 class TypesIntersection
 {
-    public function __construct(
-        public ArrayAccess&Countable $collection
-    ) {
+    /**
+     * @var \ArrayAccess&\Countable
+     */
+    public $collection;
+    /**
+     * @param \ArrayAccess&\Countable $collection
+     */
+    public function __construct($collection)
+    {
+        $this->collection = $collection;
     }
 
-    public function getCollection(): ArrayAccess&Countable
+    /**
+     * @return \ArrayAccess&\Countable
+     */
+    public function getCollection()
     {
         return $this->collection;
     }
 
     public static function getClosure(): Closure
     {
-        return static fn (ArrayAccess&Countable $collection = new ArrayIterator()): ArrayAccess&Countable => $collection;
+        return static function ($collection = null) {
+            $collection = $collection ?? new ArrayIterator();
+            return $collection;
+        };
     }
 
-    public static function getVariadic(ArrayAccess&Countable ...$variadic): array
+    /**
+     * @param \ArrayAccess&\Countable ...$variadic
+     */
+    public static function getVariadic(...$variadic): array
     {
         return $variadic;
     }
 
+    /**
+     * @param \ArrayAccess&\Countable $param1
+     * @param \ArrayAccess&\Countable $param2
+     * @param \ArrayAccess&\Countable $param3
+     * @param \ArrayAccess&\Countable $param4
+     */
     public static function getMultiple(
-        ArrayAccess&Countable $param1,
-        ArrayAccess&Countable $param2,
-        ArrayAccess&Countable $param3,
-        ArrayAccess&Countable $param4
+        $param1,
+        $param2,
+        $param3,
+        $param4
     ): array {
         return \func_get_args();
     }

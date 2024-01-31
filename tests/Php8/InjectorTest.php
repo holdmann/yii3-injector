@@ -180,7 +180,9 @@ class InjectorTest extends BaseInjectorTest
         ]);
 
         $result = (new Injector($container))
-            ->invoke(static fn (StrEnum $arg1, IntEnum $arg2, NonBackedEnum $arg3) => [$arg1, $arg2, $arg3]);
+            ->invoke(static function (StrEnum $arg1, IntEnum $arg2, NonBackedEnum $arg3) {
+                return [$arg1, $arg2, $arg3];
+            });
 
         $this->assertSame([$str, $int, $nb], $result);
     }
@@ -197,7 +199,9 @@ class InjectorTest extends BaseInjectorTest
 
         $result = (new Injector($container))
             ->invoke(
-                static fn (StrEnum $arg1, IntEnum $arg2, NonBackedEnum $arg3) => [$arg1, $arg2, $arg3],
+                static function (StrEnum $arg1, IntEnum $arg2, NonBackedEnum $arg3) {
+                    return [$arg1, $arg2, $arg3];
+                },
                 [$nb, $int, $str]
             );
 
@@ -214,7 +218,9 @@ class InjectorTest extends BaseInjectorTest
         $this->expectException(NotFoundExceptionInterface::class);
 
         (new Injector($container))
-            ->invoke(static fn (StrEnum $arg1, IntEnum $arg2) => [$arg1, $arg2]);
+            ->invoke(static function (StrEnum $arg1, IntEnum $arg2) {
+                return [$arg1, $arg2];
+            });
     }
 
     private function createEnumValue(string $enumClass, string $case)

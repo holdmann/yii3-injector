@@ -101,7 +101,9 @@ abstract class ArgumentException extends \InvalidArgumentException
             /** @var ReflectionNamedType[] $types */
             $types = $type->getTypes();
             return implode('|', array_map(
-                static fn (ReflectionNamedType $r) => $r->getName(),
+                static function (ReflectionNamedType $r) {
+                    return $r->getName();
+                },
                 $types
             )) . ' ';
         }
@@ -109,7 +111,9 @@ abstract class ArgumentException extends \InvalidArgumentException
             /** @var ReflectionNamedType[] $types */
             $types = $type->getTypes();
             return implode('&', array_map(
-                static fn (ReflectionNamedType $r) => $r->getName(),
+                static function (ReflectionNamedType $r) {
+                    return $r->getName();
+                },
                 $types
             )) . ' ';
         }
