@@ -8,7 +8,10 @@ class EngineZIL130 implements EngineInterface
 {
     public const NAME = 'ZIL 130';
 
-    private int $power = 148;
+    /**
+     * @var int
+     */
+    private $power = 148;
 
     public function getName(): string
     {

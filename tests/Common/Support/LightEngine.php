@@ -6,7 +6,10 @@ namespace Yiisoft\Injector\Tests\Common\Support;
 
 abstract class LightEngine implements EngineInterface
 {
-    protected int $power;
+    /**
+     * @var int
+     */
+    protected $power;
 
     public function getPower(): int
     {

@@ -14,24 +14,33 @@ use ReflectionFunctionAbstract;
  */
 final class ResolvingState
 {
-    private ReflectionFunctionAbstract $reflection;
+    /**
+     * @var \ReflectionFunctionAbstract
+     */
+    private $reflection;
 
     /**
      * @psalm-var array<int, object>
+     * @var mixed[]
      */
-    private array $numericArguments = [];
+    private $numericArguments = [];
 
     /**
      * @psalm-var array<string, mixed>
+     * @var mixed[]
      */
-    private array $namedArguments = [];
+    private $namedArguments = [];
 
-    private bool $shouldPushTrailingArguments;
+    /**
+     * @var bool
+     */
+    private $shouldPushTrailingArguments;
 
     /**
      * @psalm-var list<mixed>
+     * @var mixed[]
      */
-    private array $resolvedValues = [];
+    private $resolvedValues = [];
 
     /**
      * @param ReflectionFunctionAbstract $reflection Function reflection.
@@ -126,8 +135,10 @@ final class ResolvingState
 
     public function getResolvedValues(): array
     {
+        $item0Unpacked = $this->resolvedValues;
+        $item1Unpacked = $this->numericArguments;
         return $this->shouldPushTrailingArguments
-            ? [...$this->resolvedValues, ...$this->numericArguments]
+            ? array_merge($item0Unpacked, $item1Unpacked)
             : $this->resolvedValues;
     }
 

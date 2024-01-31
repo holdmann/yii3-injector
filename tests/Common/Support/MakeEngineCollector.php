@@ -6,7 +6,10 @@ namespace Yiisoft\Injector\Tests\Common\Support;
 
 class MakeEngineCollector
 {
-    public array $engines;
+    /**
+     * @var mixed[]
+     */
+    public $engines;
 
     public function __construct(EngineInterface ...$engines)
     {

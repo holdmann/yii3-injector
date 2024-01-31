@@ -8,7 +8,10 @@ class EngineMarkTwo extends LightEngine
 {
     public const NAME = 'Mark Two';
 
-    protected int $power = 160;
+    /**
+     * @var int
+     */
+    protected $power = 160;
 
     public function getName(): string
     {

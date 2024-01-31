@@ -23,7 +23,10 @@ use Yiisoft\Test\Support\Container\SimpleContainer;
  */
 final class MainBench
 {
-    private Injector $injector;
+    /**
+     * @var \Yiisoft\Injector\Injector
+     */
+    private $injector;
 
     public function setUp(array $params): void
     {

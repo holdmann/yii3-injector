@@ -8,7 +8,10 @@ class EngineVAZ2101 extends LightEngine
 {
     public const NAME = 'VAZ 2101';
 
-    protected int $power = 59;
+    /**
+     * @var int
+     */
+    protected $power = 59;
 
     public function getName(): string
     {

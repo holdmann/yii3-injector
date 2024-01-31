@@ -6,9 +6,18 @@ namespace Yiisoft\Injector\Tests\Common\Support;
 
 class MakeEngineMatherWithParam
 {
-    public EngineInterface $engine1;
-    public EngineInterface $engine2;
-    public string $parameter;
+    /**
+     * @var \Yiisoft\Injector\Tests\Common\Support\EngineInterface
+     */
+    public $engine1;
+    /**
+     * @var \Yiisoft\Injector\Tests\Common\Support\EngineInterface
+     */
+    public $engine2;
+    /**
+     * @var string
+     */
+    public $parameter;
 
     public function __construct(string $parameter, EngineInterface $engine1, EngineInterface $engine2)
     {

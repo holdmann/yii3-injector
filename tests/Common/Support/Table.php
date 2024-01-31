@@ -6,7 +6,10 @@ namespace Yiisoft\Injector\Tests\Common\Support;
 
 final class Table
 {
-    public ?ColorInterface $color;
+    /**
+     * @var \Yiisoft\Injector\Tests\Common\Support\ColorInterface|null
+     */
+    public $color;
 
     public function __construct(?ColorInterface $color = null)
     {

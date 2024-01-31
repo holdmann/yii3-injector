@@ -6,8 +6,14 @@ namespace Yiisoft\Injector\Tests\Common\Support;
 
 final class Circle
 {
-    private ColorInterface $color;
-    private ?string $name;
+    /**
+     * @var \Yiisoft\Injector\Tests\Common\Support\ColorInterface
+     */
+    private $color;
+    /**
+     * @var string|null
+     */
+    private $name;
 
     public function __construct(ColorInterface $color, ?string $name = null)
     {

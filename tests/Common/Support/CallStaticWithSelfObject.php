@@ -8,7 +8,10 @@ use Exception;
 
 final class CallStaticWithSelfObject
 {
-    public static bool $wasCalled = false;
+    /**
+     * @var bool
+     */
+    public static $wasCalled = false;
 
     public static function __callStatic(string $name, array $args): string
     {

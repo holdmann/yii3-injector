@@ -6,7 +6,10 @@ namespace Yiisoft\Injector\Tests\Common\Support;
 
 final class StaticWithStaticObject
 {
-    public static bool $wasCalled = false;
+    /**
+     * @var bool
+     */
+    public static $wasCalled = false;
 
     public static function foo(): string
     {
