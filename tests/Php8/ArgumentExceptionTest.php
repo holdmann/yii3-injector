@@ -15,7 +15,7 @@ abstract class ArgumentExceptionTest extends TestCase
     public function testRichClosureReflectionUnionTypes(): void
     {
         $reflection = new \ReflectionFunction(
-            function (\DateTimeImmutable|\DateTime|string|int $datetime): void {
+            function ($datetime): void {
                 array_map(null, func_get_args());
             }
         );
@@ -37,7 +37,7 @@ abstract class ArgumentExceptionTest extends TestCase
     public function testRenderStaticClosure(): void
     {
         $reflection = new \ReflectionFunction(
-            static function (string|int $datetime): void {
+            static function ($datetime): void {
                 array_map(null, func_get_args());
             }
         );

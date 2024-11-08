@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Yiisoft\Injector\Tests\Php8\Support;
 
-enum StrEnum: string
+class StrEnum
 {
-    case Foo = 'foo';
-    case Bar = 'bar';
+    public const Foo = 'foo';
+    public const Bar = 'bar';
 }
